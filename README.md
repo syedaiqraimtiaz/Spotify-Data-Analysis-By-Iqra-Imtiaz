@@ -2,7 +2,7 @@
 Project Category: Advanced
 [Click Here to get Dataset](https://www.kaggle.com/datasets/sanjanchaudhari/spotify-dataset)
 
-![Spotify Logo](https://github.com/najirh/najirh-Spotify-Data-Analysis-using-SQL/blob/main/spotify_logo.jpg)
+![Spotify Logo](https://github.com/syedaiqraimtiaz/Spotify-Data-Analysis-By-Iqra-Imtiaz/blob/02a0129aeefad37a22138bb20ba463182816269a/spotify_logo.jpg)
 
 ## Overview
 This project involves analyzing a Spotify dataset with various attributes about tracks, albums, and artists using **SQL**. It covers an end-to-end process of normalizing a denormalized dataset, performing SQL queries of varying complexity (easy, medium, and advanced), and optimizing query performance. The primary goals of the project are to practice advanced SQL skills and generate valuable insights from the dataset.
@@ -37,6 +37,26 @@ CREATE TABLE spotify (
     most_played_on VARCHAR(50)
 );
 ```
+  # Sample Data Insert Statements
+   INSERT INTO artists (artist_name) VALUES 
+('The Weeknd'), 
+('Taylor Swift'), 
+('Ed Sheeran');
+
+INSERT INTO albums (album_name, album_type, artist_id) VALUES
+('After Hours', 'album', 1),
+('1989', 'album', 2),
+('Divide', 'album', 3);
+
+INSERT INTO tracks (track_name, album_id, danceability, energy, duration_min) VALUES
+('Blinding Lights', 1, 0.8, 0.73, 3.2),
+('Style', 2, 0.7, 0.65, 3.5),
+('Shape of You', 3, 0.82, 0.75, 4.0);
+
+INSERT INTO streaming (track_id, channel, views, likes, comments, licensed, official_video, stream, energy_liveness, most_played_on) VALUES
+(1, 'YouTube', 500000000, 8000000, 500000, TRUE, TRUE, 1200000000, 0.9, 'Spotify'),
+(2, 'YouTube', 300000000, 5000000, 300000, TRUE, TRUE, 900000000, 0.7, 'Spotify'),
+(3, 'YouTube', 700000000, 10000000, 800000, TRUE, TRUE, 2000000000, 0.8, 'Spotify');
 ## Project Steps
 
 ###  Data Exploration
@@ -168,7 +188,7 @@ To improve query performance, we carried out the following optimization process:
         - Execution time (E.T.): **7 ms**
         - Planning time (P.T.): **0.17 ms**
     - Below is the **screenshot** of the `EXPLAIN` result before optimization:
-      ![EXPLAIN Before Index](https://github.com/najirh/najirh-Spotify-Data-Analysis-using-SQL/blob/main/spotify_explain_before_index.png)
+      ![EXPLAIN Before Index](https://github.com/syedaiqraimtiaz/Spotify-Data-Analysis-By-Iqra-Imtiaz/blob/02a0129aeefad37a22138bb20ba463182816269a/spotify_explain_before_index.png)
 
 - **Index Creation on the `artist` Column**
     - To optimize the query performance, we created an index on the `artist` column. This ensures faster retrieval of rows where the artist is queried.
@@ -182,14 +202,14 @@ To improve query performance, we carried out the following optimization process:
         - Execution time (E.T.): **0.153 ms**
         - Planning time (P.T.): **0.152 ms**
     - Below is the **screenshot** of the `EXPLAIN` result after index creation:
-      ![EXPLAIN After Index](https://github.com/najirh/najirh-Spotify-Data-Analysis-using-SQL/blob/main/spotify_explain_after_index.png)
+      ![EXPLAIN After Index](https://github.com/syedaiqraimtiaz/Spotify-Data-Analysis-By-Iqra-Imtiaz/blob/02a0129aeefad37a22138bb20ba463182816269a/spotify_explain_after_index.png)
 
 - **Graphical Performance Comparison**
     - A graph illustrating the comparison between the initial query execution time and the optimized query execution time after index creation.
     - **Graph view** shows the significant drop in both execution and planning times:
-      ![Performance Graph](https://github.com/najirh/najirh-Spotify-Data-Analysis-using-SQL/blob/main/spotify_graphical%20view%203.png)
-      ![Performance Graph](https://github.com/najirh/najirh-Spotify-Data-Analysis-using-SQL/blob/main/spotify_graphical%20view%202.png)
-      ![Performance Graph](https://github.com/najirh/najirh-Spotify-Data-Analysis-using-SQL/blob/main/spotify_graphical%20view%201.png)
+      ![Performance Graph](https://github.com/syedaiqraimtiaz/Spotify-Data-Analysis-By-Iqra-Imtiaz/blob/02a0129aeefad37a22138bb20ba463182816269a/spotify_graphical%20view%203.png)
+      ![Performance Graph](https://github.com/syedaiqraimtiaz/Spotify-Data-Analysis-By-Iqra-Imtiaz/blob/02a0129aeefad37a22138bb20ba463182816269a/spotify_graphical%20view%202.png)
+      ![Performance Graph](https://github.com/syedaiqraimtiaz/Spotify-Data-Analysis-By-Iqra-Imtiaz/blob/02a0129aeefad37a22138bb20ba463182816269a/spotify_graphical%20view%201.png)
 
 This optimization shows how indexing can drastically reduce query time, improving the overall performance of our database operations in the Spotify project.
 ---
@@ -198,32 +218,16 @@ This optimization shows how indexing can drastically reduce query time, improvin
 - **Database**: PostgreSQL
 - **SQL Queries**: DDL, DML, Aggregations, Joins, Subqueries, Window Functions
 - **Tools**: pgAdmin 4 (or any SQL editor), PostgreSQL (via Homebrew, Docker, or direct installation)
+- Data Visualization
+🎤 Top 10 Artists by Streams
+
 ## How to Run the Project
 1. Install PostgreSQL and pgAdmin (if not already installed).
 2. Set up the database schema and tables using the provided normalization structure.
 3. Insert the sample data into the respective tables.
 4. Execute SQL queries to solve the listed problems.
 5. Explore query optimization techniques for large datasets.
-   # Sample Data Insert Statements
-   INSERT INTO artists (artist_name) VALUES 
-('The Weeknd'), 
-('Taylor Swift'), 
-('Ed Sheeran');
-
-INSERT INTO albums (album_name, album_type, artist_id) VALUES
-('After Hours', 'album', 1),
-('1989', 'album', 2),
-('Divide', 'album', 3);
-
-INSERT INTO tracks (track_name, album_id, danceability, energy, duration_min) VALUES
-('Blinding Lights', 1, 0.8, 0.73, 3.2),
-('Style', 2, 0.7, 0.65, 3.5),
-('Shape of You', 3, 0.82, 0.75, 4.0);
-
-INSERT INTO streaming (track_id, channel, views, likes, comments, licensed, official_video, stream, energy_liveness, most_played_on) VALUES
-(1, 'YouTube', 500000000, 8000000, 500000, TRUE, TRUE, 1200000000, 0.9, 'Spotify'),
-(2, 'YouTube', 300000000, 5000000, 300000, TRUE, TRUE, 900000000, 0.7, 'Spotify'),
-(3, 'YouTube', 700000000, 10000000, 800000, TRUE, TRUE, 2000000000, 0.8, 'Spotify');
+ 
 
 
 ---
