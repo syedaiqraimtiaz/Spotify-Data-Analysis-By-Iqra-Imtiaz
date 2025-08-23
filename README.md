@@ -46,6 +46,53 @@ Before diving into SQL, it’s important to understand the dataset thoroughly. T
 - `Album`: The album to which the track belongs.
 - `Album_type`: The type of album (e.g., single or album).
 - Various metrics such as `danceability`, `energy`, `loudness`, `tempo`, and more.
+- # Normalized Schema Section
+- -- Artists Table
+CREATE TABLE artists (
+    artist_id SERIAL PRIMARY KEY,
+    artist_name VARCHAR(255) UNIQUE NOT NULL
+);
+
+-- Albums Table
+CREATE TABLE albums (
+    album_id SERIAL PRIMARY KEY,
+    album_name VARCHAR(255),
+    album_type VARCHAR(50),
+    artist_id INT REFERENCES artists(artist_id)
+);
+
+-- Tracks Table
+CREATE TABLE tracks (
+    track_id SERIAL PRIMARY KEY,
+    track_name VARCHAR(255),
+    album_id INT REFERENCES albums(album_id),
+    danceability FLOAT,
+    energy FLOAT,
+    loudness FLOAT,
+    speechiness FLOAT,
+    acousticness FLOAT,
+    instrumentalness FLOAT,
+    liveness FLOAT,
+    valence FLOAT,
+    tempo FLOAT,
+    duration_min FLOAT
+);
+
+-- Streaming Table
+CREATE TABLE streaming (
+    stream_id SERIAL PRIMARY KEY,
+    track_id INT REFERENCES tracks(track_id),
+    channel VARCHAR(255),
+    views FLOAT,
+    likes BIGINT,
+    comments BIGINT,
+    licensed BOOLEAN,
+    official_video BOOLEAN,
+    stream BIGINT,
+    energy_liveness FLOAT,
+    most_played_on VARCHAR(50)
+);
+
 
 ###  Querying the Data
 After the data is inserted, various SQL queries can be written to explore and analyze the data. Queries are categorized into **easy**, **medium**, and **advanced** levels to help progressively develop SQL proficiency.
@@ -151,13 +198,33 @@ This optimization shows how indexing can drastically reduce query time, improvin
 - **Database**: PostgreSQL
 - **SQL Queries**: DDL, DML, Aggregations, Joins, Subqueries, Window Functions
 - **Tools**: pgAdmin 4 (or any SQL editor), PostgreSQL (via Homebrew, Docker, or direct installation)
-
 ## How to Run the Project
 1. Install PostgreSQL and pgAdmin (if not already installed).
 2. Set up the database schema and tables using the provided normalization structure.
 3. Insert the sample data into the respective tables.
 4. Execute SQL queries to solve the listed problems.
 5. Explore query optimization techniques for large datasets.
+   # Sample Data Insert Statements
+   INSERT INTO artists (artist_name) VALUES 
+('The Weeknd'), 
+('Taylor Swift'), 
+('Ed Sheeran');
+
+INSERT INTO albums (album_name, album_type, artist_id) VALUES
+('After Hours', 'album', 1),
+('1989', 'album', 2),
+('Divide', 'album', 3);
+
+INSERT INTO tracks (track_name, album_id, danceability, energy, duration_min) VALUES
+('Blinding Lights', 1, 0.8, 0.73, 3.2),
+('Style', 2, 0.7, 0.65, 3.5),
+('Shape of You', 3, 0.82, 0.75, 4.0);
+
+INSERT INTO streaming (track_id, channel, views, likes, comments, licensed, official_video, stream, energy_liveness, most_played_on) VALUES
+(1, 'YouTube', 500000000, 8000000, 500000, TRUE, TRUE, 1200000000, 0.9, 'Spotify'),
+(2, 'YouTube', 300000000, 5000000, 300000, TRUE, TRUE, 900000000, 0.7, 'Spotify'),
+(3, 'YouTube', 700000000, 10000000, 800000, TRUE, TRUE, 2000000000, 0.8, 'Spotify');
+
 
 ---
 
