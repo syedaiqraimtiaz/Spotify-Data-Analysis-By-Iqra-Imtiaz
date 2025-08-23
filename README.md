@@ -38,6 +38,7 @@ CREATE TABLE spotify (
 );
 ```
   # Sample Data Insert Statements
+  ```sql
    INSERT INTO artists (artist_name) VALUES 
 ('The Weeknd'), 
 ('Taylor Swift'), 
@@ -57,6 +58,7 @@ INSERT INTO streaming (track_id, channel, views, likes, comments, licensed, offi
 (1, 'YouTube', 500000000, 8000000, 500000, TRUE, TRUE, 1200000000, 0.9, 'Spotify'),
 (2, 'YouTube', 300000000, 5000000, 300000, TRUE, TRUE, 900000000, 0.7, 'Spotify'),
 (3, 'YouTube', 700000000, 10000000, 800000, TRUE, TRUE, 2000000000, 0.8, 'Spotify');
+```
 ## Project Steps
 
 ###  Data Exploration
@@ -67,7 +69,8 @@ Before diving into SQL, it’s important to understand the dataset thoroughly. T
 - `Album_type`: The type of album (e.g., single or album).
 - Various metrics such as `danceability`, `energy`, `loudness`, `tempo`, and more.
 - # Normalized Schema Section
-- -- Artists Table
+```sql
+-  Artists Table
 CREATE TABLE artists (
     artist_id SERIAL PRIMARY KEY,
     artist_name VARCHAR(255) UNIQUE NOT NULL
@@ -112,6 +115,7 @@ CREATE TABLE streaming (
     energy_liveness FLOAT,
     most_played_on VARCHAR(50)
 );
+```
 
 
 ###  Querying the Data
